@@ -36,3 +36,9 @@ function assertValue<T>(v: T | undefined, errorMessage: string): T {
 
   return v
 }
+
+console.log("NEXT_PUBLIC_SANITY_PROJECT_ID:", process.env.NEXT_PUBLIC_SANITY_PROJECT_ID);
+console.log("NEXT_PUBLIC_SANITY_DATASET:", process.env.NEXT_PUBLIC_SANITY_DATASET);
+console.log("NEXT_PUBLIC_SANITY_API_VERSION:", process.env.NEXT_PUBLIC_SANITY_API_VERSION);
+console.log("SANITY_API_READ_TOKEN:", process.env.SANITY_API_READ_TOKEN);
+console.log("SANITY_API_WRITE_TOKEN:", process.env.SANITY_API_WRITE_TOKEN);

@@ -1,6 +1,7 @@
 import 'tailwindcss/tailwind.css'
 
 import { VisualEditing } from '@sanity/visual-editing/next-pages-router'
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { AppProps } from 'next/app'
 import dynamic from 'next/dynamic'
 
@@ -26,6 +27,7 @@ export default function App({
         <Component {...pageProps} />
       )}
       {draftMode && <VisualEditing />}
+      <SpeedInsights />
     </>
   )
 }

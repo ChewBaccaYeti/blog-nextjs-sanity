@@ -25,17 +25,28 @@ export const locate: DocumentLocationResolver = (params, context) => {
 
     return doc$.pipe(
       map((doc) => {
-        return {
-          locations: [
-            {
-              title: doc.title || 'Untitled',
-              href: `/posts/${doc.slug.current}`,
-            },
-            {
-              title: 'Home',
-              href: `/`,
-            },
-          ],
+        if (doc) {
+          return {
+            locations: [
+              {
+                title: doc.title || 'Untitled',
+                href: `/posts/${doc.slug.current}`,
+              },
+              {
+                title: 'Home',
+                href: `/`,
+              },
+            ],
+          }
+        } else {
+          return {
+            locations: [
+              {
+                title: 'Untitled',
+                href: '/',
+              },
+            ],
+          }
         }
       }),
     )
@@ -56,11 +67,22 @@ export const locate: DocumentLocationResolver = (params, context) => {
 
     return doc$.pipe(
       map((docs) => {
-        return {
-          locations: docs?.map((doc) => ({
-            title: doc.title || 'Untitled',
-            href: `/posts/${doc.slug.current}`,
-          })),
+        if (docs && docs.length > 0) {
+          return {
+            locations: docs.map((doc) => ({
+              title: doc.title || 'Untitled',
+              href: `/posts/${doc.slug.current}`,
+            })),
+          }
+        } else {
+          return {
+            locations: [
+              {
+                title: 'No posts found',
+                href: '/',
+              },
+            ],
+          }
         }
       }),
     )
