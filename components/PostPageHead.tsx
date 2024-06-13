@@ -10,14 +10,22 @@ export interface PostPageHeadProps {
 }
 
 export default function PostPageHead({ settings, post }: PostPageHeadProps) {
-  const title = settings.title ?? demo.title
+  console.log('settings:', settings)
+  console.log('post:', post)
+
+  const title = settings?.title ?? demo.title
   const postTitle = post?.title ? `${post.title} | ${title}` : title
+
+  console.log('settings:', settings)
+  console.log('post:', post)
+  console.log('title:', title)
+  console.log('postTitle:', postTitle)
 
   return (
     <Head>
       <title>{postTitle}</title>
       <BlogMeta />
-      {post.coverImage?.asset?._ref && (
+      {post?.coverImage?.asset?._ref && (
         <meta
           property="og:image"
           content={urlForImage(post.coverImage)
