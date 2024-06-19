@@ -1,92 +1,92 @@
 import { map, Observable } from 'rxjs'
 import {
-  DocumentLocationResolver,
-  DocumentLocationsState,
+    DocumentLocationResolver,
+    DocumentLocationsState,
 } from 'sanity/presentation'
 
 export const locate: DocumentLocationResolver = (params, context) => {
-  if (params.type === 'settings') {
-    return {
-      message: 'This document is used on all pages',
-      tone: 'caution',
-    } satisfies DocumentLocationsState
-  }
+    if (params.type === 'settings') {
+        return {
+            message: 'This document is used on all pages',
+            tone: 'caution',
+        } satisfies DocumentLocationsState
+    }
 
-  if (params.type === 'post') {
-    // Listen to the query and fetch the draft and published document
-    const doc$ = context.documentStore.listenQuery(
-      `*[_id == $id && defined(slug.current)][0]{slug,title}`,
-      params,
-      { perspective: 'previewDrafts' },
-    ) as Observable<{
-      slug: { current: string }
-      title: string | null
-    } | null>
+    if (params.type === 'post') {
+        // Listen to the query and fetch the draft and published document
+        const doc$ = context.documentStore.listenQuery(
+            `*[_id == $id && defined(slug.current)][0]{slug,title}`,
+            params,
+            { perspective: 'previewDrafts' },
+        ) as Observable<{
+            slug: { current: string }
+            title: string | null
+        } | null>
 
-    return doc$.pipe(
-      map((doc) => {
-        if (doc) {
-          return {
-            locations: [
-              {
-                title: doc.title || 'Untitled',
-                href: `/posts/${doc.slug.current}`,
-              },
-              {
-                title: 'Home',
-                href: `/`,
-              },
-            ],
-          }
-        } else {
-          return {
-            locations: [
-              {
-                title: 'Untitled',
-                href: '/',
-              },
-            ],
-          }
-        }
-      }),
-    )
-  }
+        return doc$.pipe(
+            map((doc) => {
+                if (doc) {
+                    return {
+                        locations: [
+                            {
+                                title: doc.title || 'Untitled',
+                                href: `/posts/${doc.slug.current}`,
+                            },
+                            {
+                                title: 'Home',
+                                href: `/`,
+                            },
+                        ],
+                    }
+                } else {
+                    return {
+                        locations: [
+                            {
+                                title: 'Untitled',
+                                href: '/',
+                            },
+                        ],
+                    }
+                }
+            }),
+        )
+    }
 
-  if (params.type === 'author') {
-    // Fetch all posts that reference the viewed author, if the post has a slug defined
-    const doc$ = context.documentStore.listenQuery(
-      `*[_type == "post" && references($id) && defined(slug.current)]{slug,title}`,
-      params,
-      { perspective: 'previewDrafts' },
-    ) as Observable<
-      {
-        slug: { current: string }
-        title: string | null
-      }[]
-    >
+    if (params.type === 'author') {
+        // Fetch all posts that reference the viewed author, if the post has a slug defined
+        const doc$ = context.documentStore.listenQuery(
+            `*[_type == "post" && references($id) && defined(slug.current)]{slug,title}`,
+            params,
+            { perspective: 'previewDrafts' },
+        ) as Observable<
+            {
+                slug: { current: string }
+                title: string | null
+            }[]
+        >
 
-    return doc$.pipe(
-      map((docs) => {
-        if (docs && docs.length > 0) {
-          return {
-            locations: docs.map((doc) => ({
-              title: doc.title || 'Untitled',
-              href: `/posts/${doc.slug.current}`,
-            })),
-          }
-        } else {
-          return {
-            locations: [
-              {
-                title: 'No posts found',
-                href: '/',
-              },
-            ],
-          }
-        }
-      }),
-    )
-  }
+        return doc$.pipe(
+            map((docs) => {
+                if (docs && docs.length > 0) {
+                    return {
+                        locations: docs.map((doc) => ({
+                            title: doc.title || 'Untitled',
+                            href: `/posts/${doc.slug.current}`,
+                        })),
+                    }
+                } else {
+                    return {
+                        locations: [
+                            {
+                                title: 'No posts found',
+                                href: '/',
+                            },
+                        ],
+                    }
+                }
+            }),
+        )
+    }
 
-  return null
+    return null
 }

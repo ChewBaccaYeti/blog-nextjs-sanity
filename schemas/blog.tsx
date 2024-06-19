@@ -7,12 +7,12 @@ export default {
         {
             name: 'title',
             type: 'string',
-            title: 'Title of blog article'
+            title: 'Title of blog article',
         },
         {
             name: 'slug',
             type: 'slug',
-            title: 'Slug of your blog article'
+            title: 'Slug of your blog article',
         },
         {
             name: 'titleImage',
@@ -22,15 +22,13 @@ export default {
         {
             name: 'smallDescription',
             type: 'text',
-            title: 'Small Description'
+            title: 'Small Description',
         },
         {
             name: 'content',
             type: 'array',
             title: 'Content',
-            of: [
-                {   type: 'block'   }
-            ]
-        }
-    ]
+            of: [{ type: 'block' }],
+        },
+    ],
 }

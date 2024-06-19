@@ -13,17 +13,27 @@ import styles from './PostBody.module.css'
 import { SanityImage } from './SanityImage'
 
 const myPortableTextComponents: Partial<PortableTextReactComponents> = {
-  types: {
-    image: ({ value }) => {
-      return <SanityImage {...value} />
+    types: {
+        image: ({ value }) => {
+            return <SanityImage {...value} />
+        },
     },
-  },
 }
 
-export default function PostBody({ content }) {
-  return (
-    <div className={`mx-auto max-w-2xl ${styles.portableText}`}>
-      <PortableText value={content} components={myPortableTextComponents} />
-    </div>
-  )
+type ContentBlock = {
+    _type: string
+    children: { text: string }[]
+}
+
+type PostBodyProps = { content: ContentBlock[] }
+
+export default function PostBody({ content }: PostBodyProps) {
+    return (
+        <div className={`mx-auto max-w-2xl ${styles.portableText}`}>
+            <PortableText
+                value={content}
+                components={myPortableTextComponents}
+            />
+        </div>
+    )
 }
