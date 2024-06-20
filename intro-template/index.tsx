@@ -83,35 +83,37 @@ export default memo(function IntroTemplate() {
                     )}
 
                     <ol>
-                        <Box
-                            circleTitle="1"
-                            element={
-                                <div>
-                                    <div className="col-span-2 mb-2 mt-1 font-semibold">
-                                        Create content with Sanity Studio
-                                    </div>
-                                    <div className="text-xs text-gray-700">
-                                        Your Sanity Studio is deployed at
-                                        <Link
-                                            className="mx-1 underline hover:text-blue-800"
-                                            href={studioURL}
-                                        >
-                                            {studioURL}
-                                        </Link>
-                                    </div>
+                        <li>
+                            <Box
+                                circleTitle="1"
+                                element={
+                                    <div>
+                                        <div className="col-span-2 mb-2 mt-1 font-semibold">
+                                            Create content with Sanity Studio
+                                        </div>
+                                        <div className="text-xs text-gray-700">
+                                            Your Sanity Studio is deployed at
+                                            <Link
+                                                className="mx-1 underline hover:text-blue-800"
+                                                href={studioURL}
+                                            >
+                                                {studioURL}
+                                            </Link>
+                                        </div>
 
-                                    <div className="mt-3">
-                                        <Link
-                                            className="inline-flex rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-800"
-                                            href={createPostURL}
-                                        >
-                                            Go to Sanity Studio
-                                        </Link>
+                                        <div className="mt-3">
+                                            <Link
+                                                className="inline-flex rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-800"
+                                                href={createPostURL}
+                                            >
+                                                Go to Sanity Studio
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div>
-                            }
-                        />
+                            }/>
+                        </li>
 
+                    <li>
                         <Box
                             circleTitle="2"
                             element={
@@ -156,10 +158,11 @@ export default memo(function IntroTemplate() {
                                         </>
                                     )}
                                 </div>
-                            }
-                        />
+                        }/>
+                    </li>
 
-                        <Box
+                        <li>
+                            <Box
                             circleTitle="3"
                             element={
                                 <div>
@@ -187,8 +190,8 @@ export default memo(function IntroTemplate() {
                                         </li>
                                     </ul>
                                 </div>
-                            }
-                        />
+                            }/>
+                        </li>
                     </ol>
                     <div className="text-center text-xs text-gray-700 md:invisible">
                         <RemoveBlock url={removeBlockURL} />
