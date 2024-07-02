@@ -5,6 +5,11 @@
 
 import { debugSecrets } from '@sanity/preview-url-secret/sanity-plugin-debug-secrets'
 import { visionTool } from '@sanity/vision'
+import { defineConfig } from 'sanity'
+import { presentationTool } from 'sanity/presentation'
+import { structureTool } from 'sanity/structure'
+import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
+
 import {
     apiVersion,
     dataset,
@@ -14,10 +19,6 @@ import {
 import { locate } from './plugins/locate'
 import { previewDocumentNode } from './plugins/previewPane'
 import { settingsPlugin, settingsStructure } from './plugins/settings'
-import { defineConfig } from 'sanity'
-import { presentationTool } from 'sanity/presentation'
-import { structureTool } from 'sanity/structure'
-import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import authorType from './schemas/author'
 import postType from './schemas/post'
 import settingsType from './schemas/settings'

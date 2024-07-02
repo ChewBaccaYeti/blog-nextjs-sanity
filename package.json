@@ -30,6 +30,7 @@
         "dotenv": "^16.4.5",
         "intl-segmenter-polyfill": "0.4.4",
         "next": "14.2.4",
+        "next-auth-sanity": "^1.5.3",
         "next-sanity": "9.3.10",
         "next-sanity-image": "6.1.1",
         "npm-check-updates": "^16.14.20",
