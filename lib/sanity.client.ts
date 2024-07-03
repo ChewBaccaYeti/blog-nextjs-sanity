@@ -17,7 +17,7 @@ import {
 import { createClient, type SanityClient } from 'next-sanity'
 
 export function getClient(preview?: { token: string }): SanityClient {
-    const client = createClient({
+    const client : SanityClient = createClient({
         projectId,
         dataset,
         apiVersion,
@@ -53,9 +53,9 @@ export async function getAllPosts(client: SanityClient): Promise<Post[]> {
 }
 
 export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
-    const client = getClient()
-    const slugs = (await client.fetch<string[]>(postSlugsQuery)) || []
-    return slugs.map((slug) => ({ slug }))
+    const client : SanityClient = getClient()
+    const slugs : string[] = (await client.fetch<string[]>(postSlugsQuery)) || []
+    return slugs.map((slug : string) : {slug : string} => ({ slug }))
 }
 
 export async function getPostBySlug(

@@ -10,10 +10,10 @@
 import { NextStudio } from 'next-sanity/studio'
 import config from 'sanity.config'
 
-export const dynamic = 'force-static'
+export const dynamic : string = 'force-static'
 
 export { metadata, viewport } from 'next-sanity/studio'
 
-export default function StudioPage() {
+export default function StudioPage() : JSX.Element {
     return <NextStudio config={config} />
 }

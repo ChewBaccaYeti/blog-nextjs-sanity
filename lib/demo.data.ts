@@ -1,8 +1,8 @@
 // All the demo data that used as fallbacks when there's nothing in the dataset yet
 
-export const title = 'Blog.'
+export const title : string = 'Blog.'
 
-export const description = [
+export const description : Array<object> = [
     {
         _key: '9f1a629887fd',
         _type: 'block',
@@ -54,4 +54,4 @@ export const description = [
     },
 ]
 
-export const ogImageTitle = 'A Next.js Blog with a Native Authoring Experience'
+export const ogImageTitle : string = 'A Next.js Blog with a Native Authoring Experience'

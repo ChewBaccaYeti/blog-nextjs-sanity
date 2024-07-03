@@ -7,7 +7,7 @@ export default async function handler(req, res) {
             _type: 'user',
             email,
             password, // В реальном приложении нужно хешировать пароль
-            isAdmin: false, // Добавляем поле isAdmin
+            isAdmin: false, // Добавлюм поле isAdmin
         };
         await sanityClient.create(newUser);
         res.status(201).json({ message: 'User created' });

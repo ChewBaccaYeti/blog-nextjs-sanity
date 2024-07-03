@@ -1,7 +1,7 @@
 import { validatePreviewUrl } from '@sanity/preview-url-secret'
 import { apiVersion, dataset, projectId } from 'lib/sanity.api'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { createClient } from 'next-sanity'
+import {createClient, SanityClient} from 'next-sanity'
 
 const token = process.env.SANITY_API_READ_TOKEN
 if (!token) {
@@ -9,7 +9,7 @@ if (!token) {
         'A secret is provided but there is no `SANITY_API_READ_TOKEN` environment variable setup.',
     )
 }
-const client = createClient({
+const client : SanityClient = createClient({
     projectId,
     dataset,
     apiVersion,
@@ -20,7 +20,7 @@ const client = createClient({
 export default async function handle(
     req: NextApiRequest,
     res: NextApiResponse<string | void>,
-) {
+) : Promise<void> {
     if (!req.url) {
         throw new Error('Missing url')
     }

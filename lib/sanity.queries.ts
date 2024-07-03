@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity'
 
-const postFields = groq`
+const postFields : string = groq`
   _id,
   title,
   date,
@@ -11,14 +11,14 @@ const postFields = groq`
   "author": author->{name, picture},
 `
 
-export const settingsQuery = groq`*[_type == "settings"][0]`
+export const settingsQuery : string = groq`*[_type == "settings"][0]`
 
-export const indexQuery = groq`
+export const indexQuery : string = groq`
 *[_type == "post"] | order(date desc, _updatedAt desc) {
   ${postFields}
 }`
 
-export const postAndMoreStoriesQuery = groq`
+export const postAndMoreStoriesQuery : string = groq`
 {
   "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
@@ -30,11 +30,11 @@ export const postAndMoreStoriesQuery = groq`
   }
 }`
 
-export const postSlugsQuery = groq`
+export const postSlugsQuery : string = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
 `
 
-export const postBySlugQuery = groq`
+export const postBySlugQuery : string = groq`
 *[_type == "post" && slug.current == $slug][0] {
   ${postFields}
 }

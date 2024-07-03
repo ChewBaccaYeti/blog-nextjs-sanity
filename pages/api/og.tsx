@@ -3,27 +3,28 @@ import { ImageResponse } from '@vercel/og'
 import { apiVersion, dataset, projectId } from 'lib/sanity.api'
 import type { NextRequest, NextResponse } from 'next/server'
 
-export const config = { runtime: 'edge' }
+export const config : { runtime : string } = { runtime: 'edge' }
 
 import { height, OpenGraphImage, width } from 'components/OpenGraphImage'
 import * as demo from 'lib/demo.data'
 import { Settings, settingsQuery } from 'lib/sanity.queries'
+import {SanityClient} from "next-sanity";
 
-export default async function og(req: NextRequest, res: NextResponse) {
-    const font = fetch(new URL('public/Inter-Bold.woff', import.meta.url)).then(
-        (res) => res.arrayBuffer(),
+export default async function og(req: NextRequest, res: NextResponse) : Promise<ImageResponse> {
+    const font : Promise<ArrayBuffer> = fetch(new URL('public/Inter-Bold.woff', import.meta.url)).then(
+        (res : Response) => res.arrayBuffer(),
     )
     const { searchParams } = new URL(req.url)
 
-    let title = searchParams.get('title')
+    let title : string = searchParams.get('title')
     if (!title) {
-        const client = createClient({
+        const client : SanityClient = createClient({
             projectId,
             dataset,
             apiVersion,
             useCdn: false,
         })
-        const settings = (await client.fetch<Settings>(settingsQuery)) || {}
+        const settings : Settings = (await client.fetch<Settings>(settingsQuery)) || {}
         title = settings?.ogImage?.title
     }
 
